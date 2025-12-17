@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PanierItem {
@@ -30,4 +29,52 @@ public class PanierItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Panier panier;
+
+    public Long getId() {
+        return id;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public Panier getPanier() {
+        return panier;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setPanier(Panier panier) {
+        this.panier = panier;
+    }
 }
