@@ -1,15 +1,15 @@
 package ma.ac.emi.ginf.emishop.Model;
 
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
 public class Commande {
+
+    public Commande(){}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

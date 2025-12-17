@@ -1,17 +1,14 @@
 package ma.ac.emi.ginf.emishop.Model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 public class User {
+
+    public User(){}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
