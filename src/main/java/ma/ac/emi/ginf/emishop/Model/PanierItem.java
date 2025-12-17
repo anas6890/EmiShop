@@ -1,29 +1,33 @@
 package ma.ac.emi.ginf.emishop.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data // Génère getters, setters, toString, equals, hashCode
-@NoArgsConstructor // Constructeur vide
-@AllArgsConstructor // Constructeur avec tous les champs
-@Entity
-public class PanierItem {
+import java.math.BigDecimal;
 
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class PanierItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nom;
+    private int quantity;
 
-    private int quantite;
+    @Column(precision = 10, scale = 4)
+    private BigDecimal unitPrice;
 
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+    @Column(precision = 10, scale = 4)
+    private BigDecimal totalPrice;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Panier panier;
 }
