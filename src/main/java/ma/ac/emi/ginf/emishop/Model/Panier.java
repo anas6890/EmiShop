@@ -3,30 +3,34 @@ package ma.ac.emi.ginf.emishop.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "paniers")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Panier {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Exemple : un panier appartient à un utilisateur
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @Column(precision = 10, scale = 4)
+    private BigDecimal totalAmount;
+
+    private String status;
+    private LocalDateTime createdAt;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", unique = true)
     private User user;
 
-    // Liste des produits dans le panier
-    @ManyToMany
-    @JoinTable(
-            name = "panier_products",
-            joinColumns = @JoinColumn(name = "panier_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> products;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "panier_id")
+    private List<PanierItem> items = new ArrayList<>();
+
+    @OneToOne(mappedBy = "panier", cascade = CascadeType.ALL)
+    private Commande commande;
 }
