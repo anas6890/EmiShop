@@ -9,13 +9,16 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
+    boolean existsByEmail(String email);
+
     Optional<User> findByEmailAndPassword(String email, String password);
 
     List<User> findByNom(String nom);
 
     List<User> findByPrenom(String prenom);
 
-    List<User> findDistinctByCommandesIsNotEmpty();// for example la bghina Filtrer les utilisateurs pour des opérations commerciales(hadi hi mchit b3id wsf)
+    List<User> findDistinctByCommandesIsNotEmpty();
+    // for example la bghina Filtrer les utilisateurs pour des opérations commerciales(hadi hi mchit b3id wsf)
 
 
 }
