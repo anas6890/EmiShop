@@ -31,6 +31,6 @@ public class Panier {
     @JoinColumn(name = "panier_id")
     private List<PanierItem> items = new ArrayList<>();
 
-    @OneToOne(mappedBy = "panier", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "panier", cascade = CascadeType.ALL)
     private Commande commande;
 }
