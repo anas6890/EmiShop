@@ -1,10 +1,11 @@
 package ma.ac.emi.ginf.emishop.controller;
 
 import ma.ac.emi.ginf.emishop.Service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ma.ac.emi.ginf.emishop.DTO.LoginRequest;
+import ma.ac.emi.ginf.emishop.DTO.RegisterRequest;
+
+
 
 @RestController
 @RequestMapping("/api/auth")
@@ -17,13 +18,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestParam String email, @RequestParam String password) {
-        return authService.register(email, password);
+    public String register(@RequestBody RegisterRequest registerRequest) {
+        return authService.register(registerRequest.getNom(),registerRequest.getPrenom(),registerRequest.getEmail(), registerRequest.getPassword());
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password) {
-        return authService.login(email, password);
+    public String login(@RequestBody LoginRequest loginrequest) {
+        return authService.login(loginrequest.getEmail(), loginrequest.getPassword());
     }
 }
 
