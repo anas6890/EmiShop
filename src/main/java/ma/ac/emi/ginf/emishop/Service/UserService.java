@@ -12,13 +12,15 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public String register(String email, String password) {
+    public String register(String nom, String prenom,String email, String password) {
 
         if (userRepository.existsByEmail(email)) {
             throw new RuntimeException("Email déjà utilisé");
         }
 
         User user = new User();
+        user.setNom(nom);
+        user.setPrenom(prenom);
         user.setEmail(email);
         user.setPassword(password);
 
