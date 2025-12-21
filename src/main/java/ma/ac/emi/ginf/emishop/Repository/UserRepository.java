@@ -17,6 +17,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByPrenom(String prenom);
 
+    List<User> findUserById(Long id);
+
     List<User> findDistinctByCommandesIsNotEmpty();
     // for example la bghina Filtrer les utilisateurs pour des opérations commerciales(hadi hi mchit b3id wsf)
 

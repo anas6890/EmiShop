@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PanierRepository extends JpaRepository <Panier, Long>{
+
+    @Override
+    Optional<Panier> findById(Long id);
+
     List<Panier> findByUserId(Long userId);
 
     List<Panier> findByUserIdAndStatus(Long userId, String status);

@@ -29,7 +29,7 @@ public class PanierItem {
         return id;
     }
 
-    public int getQuantity() {
+    public BigDecimal getQuantity() {
         return quantity;
     }
 

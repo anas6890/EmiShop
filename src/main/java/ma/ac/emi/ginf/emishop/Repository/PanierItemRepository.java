@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PanierItemRepository extends JpaRepository <PanierItem, Long>{
+
+
     List<PanierItem> findByPanierId(Long panierId);
 
     Optional<PanierItem> findByPanierIdAndProductId(Long panierId, Long productId);
