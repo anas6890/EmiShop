@@ -1,6 +1,8 @@
 package ma.ac.emi.ginf.emishop.Model;
 
 import jakarta.persistence.*;
+import ma.ac.emi.ginf.emishop.Enum.CommandeStatus;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -17,7 +19,8 @@ public class Commande {
     @Column(precision = 10, scale = 4)
     private BigDecimal totalAmount;
 
-    private String status;
+    @Enumerated(value=EnumType.STRING)
+    private CommandeStatus status;
     private String shippingAddress;
     private LocalDateTime createdAt;
 
@@ -37,7 +40,7 @@ public class Commande {
         return totalAmount;
     }
 
-    public String getStatus() {
+    public CommandeStatus getStatus() {
         return status;
     }
 
@@ -65,7 +68,7 @@ public class Commande {
         this.totalAmount = totalAmount;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(CommandeStatus status) {
         this.status = status;
     }
 
