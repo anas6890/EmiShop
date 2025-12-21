@@ -21,7 +21,7 @@ public class PanierService {
         this.userRepository=userRepo;
     }
 
-    Long createPanier(Long userId){
+    public Long createPanier(Long userId){
         Panier panier=new Panier();
         User user= userRepository.findUserById(userId).get(0);
         panier.setUser(user);
@@ -31,27 +31,27 @@ public class PanierService {
         Long id= panierRepository.save(panier).getId();
         return id;
     }
-    List<Panier> getPaniersOf(Long userId){
+    public List<Panier> getPaniersOf(Long userId){
         return this.panierRepository.findByUserId(userId);
     }
-    Panier getPanierById(Long id){
+    public Panier getPanierById(Long id){
         return panierRepository.findById(id).orElseThrow();
     }
-    Panier deletePanierById(Long id){
+    public Panier deletePanierById(Long id){
         Panier panier=this.getPanierById(id);
         this.panierRepository.deleteById(id);
         return panier;
     }
-    void updatePanierAmount(Long id){
+    public void updatePanierAmount(Long id){
         Panier panier=this.getPanierById(id);
         panier.setTotalAmount(
                 panier.getItems().stream()
-                        .map(item -> item.getUnitPrice().multiply(item.getQuantity()))
+                        .map(item -> item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
                         .reduce(BigDecimal.ZERO, BigDecimal::add)
         );
         panierRepository.save(panier);
     }
-    void updatePanierStatus(Long id,PanierStatus status){
+    public void updatePanierStatus(Long id,PanierStatus status){
         Panier panier=this.getPanierById(id);
         panier.setStatus(status);
         this.panierRepository.save(panier);
