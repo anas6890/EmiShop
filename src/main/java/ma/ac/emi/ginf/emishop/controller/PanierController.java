@@ -22,9 +22,9 @@ public class PanierController {
 
     @PostMapping("{user_id}/add_panier")
     public ResponseEntity<Long> addPanier(
-            @PathVariable Long id
+            @PathVariable Long user_id
     ){
-        return ResponseEntity.ok(this.panierService.createPanier(id));
+        return ResponseEntity.ok(this.panierService.createPanier(user_id));
     }
 
     @DeleteMapping("delete_panier/{id}")
