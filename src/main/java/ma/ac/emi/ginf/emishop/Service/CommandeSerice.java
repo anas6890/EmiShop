@@ -1,7 +1,9 @@
 package ma.ac.emi.ginf.emishop.Service;
 
+import ma.ac.emi.ginf.emishop.DTO.CommandeDTO;
 import ma.ac.emi.ginf.emishop.DTO.CommandeRequestDTO;
 import ma.ac.emi.ginf.emishop.Enum.CommandeStatus;
+import ma.ac.emi.ginf.emishop.Mapper.CommandeMapper;
 import ma.ac.emi.ginf.emishop.Model.Commande;
 import ma.ac.emi.ginf.emishop.Model.Panier;
 import ma.ac.emi.ginf.emishop.Model.User;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static ma.ac.emi.ginf.emishop.Mapper.CommandeMapper.toDTOList;
 
 @Service
 public class CommandeSerice {
@@ -43,15 +47,15 @@ public class CommandeSerice {
     public void deleteCommande(Long id){
         this.commandeRepository.deleteById(id);
     }
-    public Commande getCommande(Long id){
-        return this.commandeRepository.findById(id).orElseThrow();
+    public CommandeDTO getCommande(Long id){
+        return CommandeMapper.toDTO(this.commandeRepository.findById(id).orElseThrow());
     }
-    public List<Commande> getUserCommandes(Long userId){
-        return this.commandeRepository.findByUserId(userId);
+    public List<CommandeDTO> getUserCommandes(Long userId){
+        return toDTOList(this.commandeRepository.findByUserId(userId));
     }
 
-    public List<Commande> getUserCommandesByStatus(Long userId, String status){
-        return this.commandeRepository.findByUserIdAndStatus(userId, CommandeStatus.valueOf(status));
+    public List<CommandeDTO> getUserCommandesByStatus(Long userId, String status){
+        return toDTOList(this.commandeRepository.findByUserIdAndStatus(userId, CommandeStatus.valueOf(status)));
     }
 
     public void modifyCommandeStatus(Long id, CommandeStatus newStatus){

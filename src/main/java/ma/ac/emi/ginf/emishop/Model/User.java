@@ -1,5 +1,6 @@
 package ma.ac.emi.ginf.emishop.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class User {
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Commande> commandes = new ArrayList<>();
 
     public void addCommand(Commande commande) {

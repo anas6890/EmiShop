@@ -1,5 +1,7 @@
 package ma.ac.emi.ginf.emishop.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import ma.ac.emi.ginf.emishop.Enum.CommandeStatus;
 
@@ -26,6 +28,7 @@ public class Commande {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     @OneToOne(fetch = FetchType.LAZY)

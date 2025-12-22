@@ -1,9 +1,6 @@
 package ma.ac.emi.ginf.emishop.controller;
 
-import ma.ac.emi.ginf.emishop.DTO.ChangeShippingAddressRequest;
-import ma.ac.emi.ginf.emishop.DTO.ChangeStatusRequest;
-import ma.ac.emi.ginf.emishop.DTO.CommandeRequestDTO;
-import ma.ac.emi.ginf.emishop.DTO.GetUserCommandesByStatusRequest;
+import ma.ac.emi.ginf.emishop.DTO.*;
 import ma.ac.emi.ginf.emishop.Enum.CommandeStatus;
 import ma.ac.emi.ginf.emishop.Model.Commande;
 import ma.ac.emi.ginf.emishop.Service.CommandeSerice;
@@ -23,7 +20,7 @@ public class CommandeController {
     }
 
     @GetMapping("get_commande/{id}")
-    public ResponseEntity<Commande> getCommande(
+    public ResponseEntity<CommandeDTO> getCommande(
             @PathVariable Long id
     ){
         return ResponseEntity.ok(this.commandeSerice.getCommande(id));
@@ -39,12 +36,12 @@ public class CommandeController {
         return ResponseEntity.ok().build();
     }
     @GetMapping("get_all_commandes/{id}")
-    public ResponseEntity<List<Commande>> getCommandes(@PathVariable Long id){
+    public ResponseEntity<List<CommandeDTO>> getCommandes(@PathVariable Long id){
         return ResponseEntity.ok(this.commandeSerice.getUserCommandes(id));
     }
 
     @GetMapping("get_commandes_by_status/{id}/{status}")
-    public ResponseEntity<List<Commande>> getCommandesByStatus(
+    public ResponseEntity<List<CommandeDTO>> getCommandesByStatus(
              @PathVariable Long id,
              @PathVariable String status
             ){
