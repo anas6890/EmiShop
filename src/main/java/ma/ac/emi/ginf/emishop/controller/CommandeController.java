@@ -4,6 +4,7 @@ import ma.ac.emi.ginf.emishop.DTO.ChangeShippingAddressRequest;
 import ma.ac.emi.ginf.emishop.DTO.ChangeStatusRequest;
 import ma.ac.emi.ginf.emishop.DTO.CommandeRequestDTO;
 import ma.ac.emi.ginf.emishop.DTO.GetUserCommandesByStatusRequest;
+import ma.ac.emi.ginf.emishop.Enum.CommandeStatus;
 import ma.ac.emi.ginf.emishop.Model.Commande;
 import ma.ac.emi.ginf.emishop.Service.CommandeSerice;
 import org.apache.catalina.connector.Response;
@@ -38,15 +39,16 @@ public class CommandeController {
         return ResponseEntity.ok().build();
     }
     @GetMapping("get_all_commandes/{id}")
-    public ResponseEntity<List<Commande>> getCommandes(@PathVariable Long userId){
-        return ResponseEntity.ok(this.commandeSerice.getUserCommandes(userId));
+    public ResponseEntity<List<Commande>> getCommandes(@PathVariable Long id){
+        return ResponseEntity.ok(this.commandeSerice.getUserCommandes(id));
     }
 
-    @GetMapping("get_commandes_by_status")
+    @GetMapping("get_commandes_by_status/{id}/{status}")
     public ResponseEntity<List<Commande>> getCommandesByStatus(
-            @RequestBody GetUserCommandesByStatusRequest rqst
+             @PathVariable Long id,
+             @PathVariable String status
             ){
-        return ResponseEntity.ok(this.commandeSerice.getUserCommandesByStatus(rqst.getUserId(), rqst.getStatus()));
+        return ResponseEntity.ok(this.commandeSerice.getUserCommandesByStatus(id, status));
     }
 
     @PostMapping("{id}/modify_status")

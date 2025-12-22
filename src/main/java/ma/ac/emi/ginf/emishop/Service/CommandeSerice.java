@@ -50,8 +50,8 @@ public class CommandeSerice {
         return this.commandeRepository.findByUserId(userId);
     }
 
-    public List<Commande> getUserCommandesByStatus(Long userId, CommandeStatus status){
-        return this.commandeRepository.findByUserIdAndStatus(userId, String.valueOf(status));
+    public List<Commande> getUserCommandesByStatus(Long userId, String status){
+        return this.commandeRepository.findByUserIdAndStatus(userId, CommandeStatus.valueOf(status));
     }
 
     public void modifyCommandeStatus(Long id, CommandeStatus newStatus){

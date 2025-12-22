@@ -1,5 +1,6 @@
 package ma.ac.emi.ginf.emishop.Repository;
 
+import ma.ac.emi.ginf.emishop.Enum.CommandeStatus;
 import ma.ac.emi.ginf.emishop.Model.Commande;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +19,7 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 
     List<Commande> findByStatus(String status);
 
-    List<Commande> findByUserIdAndStatus(Long userId,String status);
+    List<Commande> findByUserIdAndStatus(Long userId, CommandeStatus status);
 
     List<Commande> findByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
 
