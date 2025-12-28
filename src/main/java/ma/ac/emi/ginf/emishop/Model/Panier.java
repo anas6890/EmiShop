@@ -1,6 +1,8 @@
 package ma.ac.emi.ginf.emishop.Model;
 
 import jakarta.persistence.*;
+import ma.ac.emi.ginf.emishop.Enum.PanierStatus;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,7 +20,9 @@ public class Panier {
     @Column(precision = 10, scale = 4)
     private BigDecimal totalAmount;
 
-    private String status;
+    @Enumerated(value = EnumType.STRING)
+    private PanierStatus status;
+
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,7 +40,7 @@ public class Panier {
         return totalAmount;
     }
 
-    public String getStatus() {
+    public PanierStatus getStatus() {
         return status;
     }
 
@@ -60,7 +64,7 @@ public class Panier {
         this.totalAmount = totalAmount;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(PanierStatus status) {
         this.status = status;
     }
 
